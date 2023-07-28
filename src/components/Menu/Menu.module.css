@@ -1,0 +1,63 @@
+
+.menu a {
+    color: var(--text-color);
+    font-size: 18px;
+    transition: .3s;
+}
+
+
+
+@media(max-width:900px) {
+    .menu {
+        position: absolute;
+        padding: 0 10%;
+        right: -100%;
+        transition: .3s;
+        top: 0;
+        height: 100vh;
+        overflow-y: auto;
+        background-color: var(--primary-color);
+        padding-top: 138px;
+    }
+
+    .fixed .menu{
+        top: 80px;
+    }
+    .menu a {
+        display: block;
+        color: #FFF;
+    }
+    .menu a:active {
+        opacity: .6;
+        transition: .3s;
+    }
+
+    .menu a + a {
+        margin-top: 80px;
+    }
+
+    .active {
+        right: 0%;
+    }
+
+    
+}
+
+@media(min-width:901px) {
+    .menu a + a {
+        margin-left: 80px;
+    }
+
+    .menu a:hover {
+        color: var(--primary-color);
+    }
+}
+
+
+.menuWhite a {
+    color: #FFF;
+}
+
+.menuWhite a:hover {
+    color: var(--secondary-color);
+}

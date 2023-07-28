@@ -1,0 +1,20 @@
+.label {
+    display: block;
+}
+
+.label + .label {
+    margin-top: 15px;
+}
+
+.input {
+    width: 100%;
+    padding: 10px 5px;
+    border: none;
+    border-bottom: 1px solid var(--primary-color);
+    outline: unset;
+}
+
+.input::placeholder {
+    color: rgba(26, 23, 23, 0.38);
+    font-size: 13px;
+}

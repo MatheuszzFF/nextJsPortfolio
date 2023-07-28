@@ -1,0 +1,9 @@
+.logo {
+    color: var(--primary-color);
+    font-size: 48px;
+    transition: .3s;
+}
+
+.scrolled {
+    color: #FFF;
+}

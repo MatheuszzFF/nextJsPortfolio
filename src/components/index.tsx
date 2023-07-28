@@ -1,0 +1,11 @@
+export { Banner } from "./Banner";
+import { Input } from './Input/Input';
+export { Header } from "./Header";
+export { Logo } from "./Logo";
+export { Menu } from "./Menu";
+export { MobileButton } from "./MobileButton";
+export { Tab } from "./Tab";
+export { Projects } from "./Projects";
+export { SimpleSlider } from './Slider';
+export { HeaderTop } from './HeaderTop';
+export { Input } from './Input';

@@ -1,0 +1,17 @@
+.primaryButton {
+    border-radius: 6px;
+    padding: 10px 30px;
+    background-color: var(--primary-color);
+    color: #fff;
+    transition: .3s;
+}
+
+.primaryButton:hover {
+    opacity: .7;
+}
+
+.primaryButton:active {
+    color: var(--primary-color);
+    background-color: #fff;
+    outline: 2px solid var(--primary-color);
+}

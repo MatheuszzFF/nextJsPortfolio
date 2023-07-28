@@ -1,95 +1,64 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+"use client";
+import { Banner, Tab, SimpleSlider } from "components";
+import { useContext, useEffect } from "react";
+import { useState } from "react";
+import { ProjectContext } from "../context";
 
 export default function Home() {
+  const projects = useContext(ProjectContext);
+  const [sobre, setSobre] = useState([]);
+  const [conhecimentos, setConhecimentos] = useState([]);
+  
+  useEffect(() => {
+    fetch("http://localhost:3000/api/sobre")
+      .then((response) => response.json())
+      .then((data) => setSobre(data));
+
+    fetch("http://localhost:3000/api/conhecimentos")
+      .then((response) => response.json())
+      .then((data) => setConhecimentos(data));
+  }, []);
+
+  const slideSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+  };
+
+  const slideImages: string[] = [];
+
+  projects.map(({ image }, index) => {
+    slideImages.push(image);
+  });
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+    <main>
+      <Banner />
+      <Tab
+        title="Sobre"
+        isWithImage={true}
+        iconWithBorders={true}
+        backgroundBlack={false}
+        cvButton={true}
+        contentInLeft={false}
+        contents={sobre}
+      />
+      <Tab
+        title="Conhecimentos"
+        isWithImage={false}
+        iconWithBorders={false}
+        backgroundBlack={true}
+        cvButton={false}
+        contentInLeft={true}
+        contents={conhecimentos}
+      />
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+      <SimpleSlider
+        settings={slideSettings}
+        images={slideImages}
+      />
     </main>
-  )
+  );
 }

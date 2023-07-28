@@ -1,0 +1,41 @@
+.mobile {
+    display: none;
+}
+
+
+.btn, .btn::after, .btn::before {
+    height: 3px;
+    background-color: var(--primary-color);
+    width: 100%;
+    position: relative;
+    z-index: 4;
+}
+
+.btn::after, .btn::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 10px;
+    background-color: inherit;
+}
+
+.btn::before {
+    top: unset;
+    bottom: 10px;
+}
+
+
+@media(max-width:900px) {
+    .mobile {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+    }
+
+    .active {
+        background-color: #FFF;
+    }
+}
