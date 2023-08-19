@@ -1,9 +1,13 @@
 
 import "./globals.css";
+import React from 'react'
 import { Montserrat } from "next/font/google";
 
 import { App } from './App'
 import { ProjectsProvider } from "context/ProjectsContext/ProjectsContext";
+import { UserProvider } from '../context/UserContext/UserContext';
+
+
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -24,9 +28,12 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body className={montserrat.className}>
-        <ProjectsProvider>
-          <App children={children}/>
-        </ProjectsProvider>
+        <UserProvider>
+          <ProjectsProvider>
+            <App children={children}/>
+          </ProjectsProvider>
+        </UserProvider>
+        
       </body>
     </html>
   );

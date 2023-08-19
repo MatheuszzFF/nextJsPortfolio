@@ -3,7 +3,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import styles from "./Tabs.module.css";
 import { TTabs } from "./type";
-import { Button } from "components/Button";
+import { Button } from "components/ui/Button";
 
 export const Tab = (props: TTabs) => {
   const [tabActive, setTabActive] = useState(0);

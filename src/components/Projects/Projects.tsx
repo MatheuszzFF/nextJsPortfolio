@@ -1,3 +1,5 @@
+'use client' 
+
 import { TProjects } from "./type";
 import { useState, useEffect } from "react";
 import styles from "./projects.module.css";
@@ -20,7 +22,6 @@ export const Projects = ({ projects }: any) => {
   }, [projects]);
 
   useEffect(() => {
-    console.log(activeCategory);
   }, [activeCategory]);
 
   const handleClick = (category?: string) => {
@@ -57,7 +58,7 @@ export const Projects = ({ projects }: any) => {
           </nav>
 
           <div className={styles.grid}>
-            {projects.map((project: TProjects, index) => {
+            {projects.map((project: TProjects, index: number) => {
               const { name, title, image, categories } = project;
 
               if (
@@ -66,7 +67,6 @@ export const Projects = ({ projects }: any) => {
               ) {
                 return (
                   <div key={`image ${index}`}>
-                    <Image src={image} width={300} height={150} onClick={() => openInterna(this)}/>
                   </div>
                 );
               }

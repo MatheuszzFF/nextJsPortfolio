@@ -1,9 +1,10 @@
 'use client'
 
 import { Header, Logo, Menu } from "components";
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import {usePathname} from 'next/navigation';
 import { Montserrat } from "next/font/google";
+
 
 type TApp = {
     children: React.ReactNode
@@ -25,7 +26,7 @@ export const App = (props: TApp) => {
         })
     },[])
 
-    if(pathname !== '/login') {
+    if(pathname !== '/login' && pathname !== '/create-account' &&  pathname !== '/reset-password') {
         return (
             <>
                 <Header scrolled={scrolled} >
@@ -37,11 +38,9 @@ export const App = (props: TApp) => {
         )
     } else {
         return (
-            <html lang="pt-br">
-                <body className={montserrat.className} style={{overflow: 'hidden'}}>
-                    { children }
-                </body>
-            </html>
+            <>
+                { children }
+            </>
         )
     }
   

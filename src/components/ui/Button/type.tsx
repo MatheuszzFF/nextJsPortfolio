@@ -1,5 +1,5 @@
 export type TButton = {
-    src: string,
+    src?: string,
     isBgPrimary: boolean,
     btnChildren: any,
     icon?: string

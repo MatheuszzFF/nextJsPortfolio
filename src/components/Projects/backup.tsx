@@ -25,14 +25,12 @@ export const Projects = ({ projects }: {projects: TProjects[]}) => {
   }, []);
 
   const handleClick = (selectedCategory?: string) => {
-    console.log(filteredProjects)
     setFilteredProjects(
       projects.filter(project => {
         let hasCategory = false;
         project.categories.forEach(category => {
 
           if(category === selectedCategory) {
-            console.log(project)
             hasCategory = true;
           } 
         })

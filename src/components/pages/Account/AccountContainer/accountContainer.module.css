@@ -2,7 +2,7 @@
     height: 100vh;
 }
 
-.main section, .main div {
+.main section, .main > div {
     height: 100%;
 }
 
@@ -11,6 +11,9 @@
     flex-basis: 40%;
 }
 
+.flex {
+  display: flex;   
+}
 .loginSection {
     display: flex;
     flex-direction: column;
@@ -19,10 +22,20 @@
     gap: 60px;
     width: 100%;
     box-sizing: border-box;
-    padding: 0 100px;
+    padding: 100px;
 }
 
 .form {
     width: 400px;
     max-width: 100%;
+}
+
+@media(max-width:600px) {
+    .loginSection {
+        padding: 40px;
+    }
+
+    .flex {
+        flex-direction: column;
+    }
 }

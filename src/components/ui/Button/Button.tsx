@@ -13,13 +13,13 @@ export const Button = (props: TButton) => {
       href={src}
       className={`${styles.button} ${isBgPrimary && styles.bgPrimaryColor}`}
       style={
-        icon && {
+        icon ? {
           backgroundImage: `url(${icon})`,
           backgroundSize: `18px`,
           backgroundRepeat: "no-repeat",
           backgroundPosition: `92% center`,
           paddingRight: '40px',
-        }
+        } : undefined
       }
     >
       {btnChildren}
