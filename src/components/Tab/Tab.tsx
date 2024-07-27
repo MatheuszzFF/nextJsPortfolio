@@ -25,6 +25,8 @@ export const Tab = (props: TTabs) => {
     cvButton,
     contents,
   } = props;
+
+  
   return (
     <section className={styles.section}>
       <div className="container">

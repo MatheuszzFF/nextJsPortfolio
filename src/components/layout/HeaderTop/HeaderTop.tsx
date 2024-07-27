@@ -17,17 +17,23 @@ export const HeaderTop = () => {
       </div>
     )
   } else if(user) {
+    console.log(user);
     return (
       <div className={styles.headerTop}>
           <div className={`container d-flex justify-content-end align-items-center`}>
             <Link className={styles.link} href="/accountSettings" title="Abrir configurações">
               <Image width="20" height="20" src="/engrenagem.png" alt="icone de engrenagem"/>
             </Link>
-            <h5 style={{margin: 'auto 15px auto 0'}}>Bem vindo {user.displayName}</h5>
-            <ButtonPrimary 
-            isButtonTag={true} 
-            onClick={logout}
-            >Sair</ButtonPrimary>
+            <div className="d-flex align-items-center">
+              <h5 style={{margin: 'auto 15px auto 0'}}>Bem vindo {user.displayName}</h5>
+              {user.photoURL && (
+                <Image style={{borderRadius: '50%'}}width="20" height="20" alt="your photo" src={user.photoURL}/>
+              )}
+              <ButtonPrimary 
+              isButtonTag={true} 
+              onClick={logout}
+              >Sair</ButtonPrimary>
+            </div>
           </div>
       </div>
     )

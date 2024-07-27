@@ -8,7 +8,9 @@ import {
     updateProfile, 
     signOut,
     sendPasswordResetEmail,
-    sendEmailVerification
+    sendEmailVerification,
+    GoogleAuthProvider,
+    signInWithPopup
 } from "@firebase/auth";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -33,11 +35,13 @@ export const UserProvider = ({children} : { children: ReactNode } ) => {
     // Initialize Firebase
     const firebase = initializeApp(firebaseConfig);
     const auth = getAuth();
-   
     const [user, setUser] = useState<any>(auth);
     const [loading, setLoading] = useState<boolean>(true);
     const [ error, setError ] = useState<string | null>(null);
 
+    const googleProvider = new GoogleAuthProvider();
+
+    auth.useDeviceLanguage()
 
     useEffect(() => {
         try {
@@ -49,6 +53,28 @@ export const UserProvider = ({children} : { children: ReactNode } ) => {
             console.log(error)
         }
     }, [])
+
+    function signInWithGoogle() {
+        signInWithPopup(auth, googleProvider)
+            .then((result) => {
+                // This gives you a Google Access Token. You can use it to access the Google API.
+                console.log({'result': result});
+                const credential = GoogleAuthProvider.credentialFromResult(result);
+                if(credential) {
+                    console.log({'credential': credential});
+
+                    const token = credential.accessToken;
+                    setUser(result.user);
+                    console.log(user);
+                }
+            }).catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                const email = error.customData.email;
+                toast.error(errorMessage);
+                const credential = GoogleAuthProvider.credentialFromError(error);
+        });
+    }
 
     function createUser(email: string, password: string, name: string) {
         setLoading(true)
@@ -87,7 +113,6 @@ export const UserProvider = ({children} : { children: ReactNode } ) => {
     function login(email: string, password:string) {
         signInWithEmailAndPassword(auth, email, password)
         .then(userCredentials => {
-            router.push('/');
             toast.success('Usuário logado!');
         })
         .catch(error => {
@@ -135,6 +160,7 @@ export const UserProvider = ({children} : { children: ReactNode } ) => {
         createUser,
         error,
         sendPasswordReset,
+        signInWithGoogle
     }
 
     return (

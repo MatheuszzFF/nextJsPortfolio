@@ -6,14 +6,19 @@ import { UserContext } from '../../../../context/UserContext/UserContext';
 import Link from 'next/link'
 import { AccountContainer } from '../AccountContainer/AccountContainer';
 import styles from './accountSection.module.css';
+import { useRouter } from 'next/navigation';
 
+export function AccountSection({ sectionType}: any) {
 
-export function AccountSection({children, sectionType}: any) {
-
-    const { login, createUser, error, sendPasswordReset } = useContext(UserContext)
+    const { login, createUser, error, sendPasswordReset, signInWithGoogle, user } = useContext(UserContext)
     const [ email, setEmail ] = useState<string>('')
     const [ password, setPassword ] = useState<string>('')
     const [ name, setName ] = useState<string>('')
+    const router = useRouter();
+
+    useEffect(() => {
+        user && router.push('/');
+    },[user])
 
     const emailInput = {
         name: 'email',
@@ -58,6 +63,12 @@ export function AccountSection({children, sectionType}: any) {
                     <Link className={styles.link} href="/create-account">Crie sua conta!</Link>
                     <Link className={styles.link} href="/reset-password">Esqueci a senha</Link>
                 </div>
+
+                <ButtonPrimary 
+                isButtonTag={true}
+                onClick={() => signInWithGoogle()}
+                >Login com google!
+                </ButtonPrimary>
             </AccountContainer>
         )
     } else if(sectionType == 'createAccount') {
